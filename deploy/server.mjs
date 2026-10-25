@@ -17,12 +17,50 @@ import http from 'node:http';
 import fs from 'node:fs';
 import fsp from 'node:fs/promises';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { mountApi } from './mount-api.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '..');
 const DIST = path.join(root, 'frontend', 'dist');
+// The exercise stills and animations the repository carries (180 px — the size its licence allows
+// on a website or a self-hosted server, scripts/catalogue/stage-media.mjs) are served straight from
+// catalogue/media: staging them into dist first would put a second 190 MB copy in every build
+// without changing a byte of what the app asks for (/exercise-media/still|clip/<id>.*).
+const MEDIA = path.join(root, 'catalogue', 'media');
+
+// Optional whole-site password: SITE_USER and SITE_PASS together close the instance to everybody
+// else — the media licence asks for a closed instance when the 180 px set must not be public, and
+// the app itself still works as a guest without any account, so closing registration alone would
+// not keep strangers out. Off unless BOTH are set, so an install that wants to be public is silent.
+const SITE_USER = process.env.SITE_USER || '';
+const SITE_PASS = process.env.SITE_PASS || '';
+const GATE = !!(SITE_USER && SITE_PASS);
+// The exercise media is served only when the instance is either closed (the gate above) or openly
+// declared public (MEDIA_OPEN=1, the arrangement scripts/catalogue/stage-media.mjs describes for a
+// website). Unset on both counts it answers 404, so a deploy that forgets the setting never
+// publishes the 180 px set by accident.
+const MEDIA_PUBLIC = /^(1|true|yes|on)$/i.test(process.env.MEDIA_OPEN || '');
+const MEDIA_ON = GATE || MEDIA_PUBLIC;
+
+function sameSecret(given, expected) {
+  const a = Buffer.from(String(given));
+  const b = Buffer.from(String(expected));
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+function authorized(req) {
+  if (!GATE) return true;
+  const m = /^Basic\s+(.+)$/i.exec(req.headers.authorization || '');
+  if (!m) return false;
+  const raw = Buffer.from(m[1], 'base64').toString('utf8');
+  const cut = raw.indexOf(':');
+  if (cut < 0) return false;
+  const user = sameSecret(raw.slice(0, cut), SITE_USER);
+  const pass = sameSecret(raw.slice(cut + 1), SITE_PASS);
+  return user && pass;
+}
 const DATA_DIR = process.env.DATA_DIR || path.join(root, 'data');
 // The API reads its configuration at import time, so the resolved directory has to be in place
 // before mountApi() imports it.
@@ -74,8 +112,15 @@ if (mounted) {
 async function serveStatic(req, res, pathname) {
   const urlPath = decodeURIComponent(pathname);
   const rel = urlPath.replace(/^\/+/, '');
-  let file = path.resolve(DIST, rel);
-  if (file !== DIST && !file.startsWith(DIST + path.sep)) {
+  // /exercise-media/<still|clip>/<id>.<ext> comes from catalogue/media, everything else from dist.
+  const mediaRel = rel.startsWith('exercise-media/') ? rel.slice('exercise-media/'.length) : null;
+  if (mediaRel !== null && !MEDIA_ON) {
+    res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('not found');
+    return;
+  }
+  const mediaRoot = mediaRel === null ? DIST : MEDIA;
+  let file = path.resolve(mediaRoot, mediaRel === null ? rel : mediaRel);
+  if (file !== mediaRoot && !file.startsWith(mediaRoot + path.sep)) {
     res.writeHead(403).end('forbidden');
     return;
   }
@@ -103,12 +148,38 @@ async function serveStatic(req, res, pathname) {
       : base === 'index.html' || base === 'manifest.json' ? 'no-cache'
         : 'public, max-age=3600');
   res.setHeader('x-content-type-options', 'nosniff');
+  res.setHeader('accept-ranges', 'bytes');
   if (req.method === 'HEAD') { res.writeHead(200); res.end(); return; }
+  // A phone's video element fetches one byte range at a time, and iOS plays nothing from a server
+  // that answers 200 to a Range request, so the clips are streamed as 206.
+  const m = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || '');
+  if (m && (m[1] || m[2])) {
+    const start = m[1] ? Number(m[1]) : Math.max(0, stat.size - Number(m[2]));
+    const end = m[1] && m[2] ? Math.min(Number(m[2]), stat.size - 1) : stat.size - 1;
+    if (start > end || start >= stat.size) {
+      res.setHeader('content-range', `bytes */${stat.size}`);
+      res.writeHead(416).end();
+      return;
+    }
+    res.setHeader('content-range', `bytes ${start}-${end}/${stat.size}`);
+    res.setHeader('content-length', end - start + 1);
+    res.writeHead(206);
+    fs.createReadStream(file, { start, end }).on('error', () => res.destroy()).pipe(res);
+    return;
+  }
   fs.createReadStream(file).on('error', () => res.destroy()).pipe(res);
 }
 
 function route(req, res) {
   const pathname = (req.url || '/').split('?')[0];
+  if (!authorized(req)) {
+    res.writeHead(401, {
+      'www-authenticate': 'Basic realm="openGym", charset="UTF-8"',
+      'content-type': 'text/plain; charset=utf-8',
+    });
+    res.end('authentication required');
+    return;
+  }
   if (pathname === '/api' || pathname.startsWith('/api/')) {
     if (!apiHandlers.length) {
       res.writeHead(503, { 'content-type': 'application/json; charset=utf-8' });
