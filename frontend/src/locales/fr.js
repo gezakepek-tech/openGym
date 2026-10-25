@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': 'Faire clignoter l’écran',
   'Version': 'Version',
   'Source code': 'Code source',
+  'This server runs an unofficial, modified copy.': 'Ce serveur exécute une copie non officielle et modifiée.',
   '{0} rest': '{0} de repos',
   'No rest timer': 'Pas de minuteur',
   'Buttons, timed sets': 'Boutons, séries chronométrées',

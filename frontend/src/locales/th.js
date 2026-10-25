@@ -1888,6 +1888,7 @@ export default {
   'Flash the screen': 'กะพริบหน้าจอ',
   'Version': 'เวอร์ชัน',
   'Source code': 'ซอร์สโค้ด',
+  'This server runs an unofficial, modified copy.': 'เซิร์ฟเวอร์นี้รันสำเนาที่ไม่เป็นทางการและถูกแก้ไข',
   '{0} rest': 'พัก {0}',
   'No rest timer': 'ไม่จับเวลาพัก',
   'Buttons, timed sets': 'ปุ่ม, เซ็ตจับเวลา',

@@ -1932,6 +1932,7 @@ export default {
   'Flash the screen': 'وميض الشاشة',
   'Version': 'الإصدار',
   'Source code': 'الشيفرة المصدرية',
+  'This server runs an unofficial, modified copy.': 'يشغّل هذا الخادم نسخة معدّلة غير رسمية.',
   '{0} rest': 'راحة {0}',
   'No rest timer': 'بدون مؤقت راحة',
   'Buttons, timed sets': 'الأزرار، المجموعات المؤقتة',

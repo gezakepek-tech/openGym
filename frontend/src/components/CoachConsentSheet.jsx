@@ -83,7 +83,7 @@ export function AiConsentSection() {
   if (!list) return null
   return <Section title={t('AI data sharing')}
     footer={t('Who the Coach may send your training to from this device. Withdraw it and the Coach asks again next time. A model on your own network never needs asking.')}>
-    {!list.length && <Row icon="lock" iconTint="var(--green)" title={t('Nothing allowed yet')} subtitle={t('The Coach asks before anything leaves.')} />}
+    {!list.length && <Row icon="lock" iconTint="var(--acc)" title={t('Nothing allowed yet')} subtitle={t('The Coach asks before anything leaves.')} />}
     {list.map(c => <Row key={c.key} icon="shield" iconTint="var(--acc)" title={c.name}
       subtitle={(c.via === 'server' ? t('Through your server') : t('With your API key')) + ' · ' + t('Allowed {0}', fmtDate(isoOf(new Date(c.at)), false, true))}>
       <Button size="sm" onClick={() => withdraw(c)}>{t('Withdraw')}</Button>

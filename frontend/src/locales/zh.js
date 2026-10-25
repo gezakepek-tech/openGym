@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': '闪烁屏幕',
   'Version': '版本',
   'Source code': '源代码',
+  'This server runs an unofficial, modified copy.': '此服务器运行的是非官方修改版本。',
   '{0} rest': '休息 {0}',
   'No rest timer': '不计时休息',
   'Buttons, timed sets': '按钮、计时组',

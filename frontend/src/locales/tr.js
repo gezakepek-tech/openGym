@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': 'Ekranı yakıp söndür',
   'Version': 'Sürüm',
   'Source code': 'Kaynak kodu',
+  'This server runs an unofficial, modified copy.': 'Bu sunucu resmî olmayan, değiştirilmiş bir kopya çalıştırıyor.',
   '{0} rest': '{0} dinlenme',
   'No rest timer': 'Sayaç yok',
   'Buttons, timed sets': 'Düğmeler, süreli setler',

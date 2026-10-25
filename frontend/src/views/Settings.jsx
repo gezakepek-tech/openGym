@@ -540,7 +540,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
       <Section title={t('Before and during')}>
         {/* The quick weigh-in that opens on Start (sheets.jsx startFlow, issue #137); off skips
             straight to the session. Home and Stats still log weight by hand. */}
-        <Row icon="scale" iconTint="var(--green)" title={t('Weigh in before workouts')}
+        <Row icon="scale" iconTint="var(--acc)" title={t('Weigh in before workouts')}
           subtitle={t('Asks for your body weight when a workout starts. Off starts the session straight away.')}>
           <Switch checked={S.weighIn !== false} onChange={v => update(s => { s.weighIn = v })} />
         </Row>
@@ -579,7 +579,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
               the routine is what you said you would do, and history and progression decide the
               weight. The other choice is the old behaviour, reps carried over from last time.
               Absent (an older profile) reads as the plan. */}
-          <SelectRow icon="clipboard" iconTint="var(--green)" title={t('Planned sessions start from')}
+          <SelectRow icon="clipboard" iconTint="var(--acc)" title={t('Planned sessions start from')}
             value={S.startFrom === 'last' ? 'last' : 'plan'} onChange={v => update(s => { s.startFrom = v })}
             options={[
               { value: 'plan', label: t('Your plan'), subtitle: t('The routine’s sets and reps. Your history decides the weight.') },
@@ -594,7 +594,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
         {/* The lean workout screen keeps the sets and one "more" button per exercise; each switch
             brings one of the old always-visible button groups back for people who liked them. */}
         <Section title={t('Buttons on the workout screen')} footer={t('Everything hidden here stays one tap away: the ⋯ button of an exercise and the number of a set.')}>
-          <Row icon="plusCircle" iconTint="var(--green)" title={t('Weight and reps buttons')} subtitle={t('Off: tap the number and type it')}>
+          <Row icon="plusCircle" iconTint="var(--acc)" title={t('Weight and reps buttons')} subtitle={t('Off: tap the number and type it')}>
             <Switch checked={wc.steppers} onChange={v => setWc('steppers', v)} />
           </Row>
           <Row icon="bolt" iconTint="var(--orange)" title={t('Drop and burst shortcuts on every set')}>
@@ -694,7 +694,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
         </Row>
       </Section>
       <Section>
-        <Row icon="clipboard" iconTint="var(--green)" title={t('Load starter plan')} accessory="chevron" onClick={starterPlanSheet} />
+        <Row icon="clipboard" iconTint="var(--acc)" title={t('Load starter plan')} accessory="chevron" onClick={starterPlanSheet} />
       </Section>
     </>,
 
@@ -812,7 +812,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
           <Switch checked={S.checkIn !== false} onChange={v => update(s => { s.checkIn = v })} />
         </Row>
         {/* The Home summary is optional; hiding it leaves weight logging, history and Stats intact. */}
-        <Row icon="scale" iconTint="var(--green)" title={t('Body weight')}
+        <Row icon="scale" iconTint="var(--acc)" title={t('Body weight')}
           subtitle={t('Show the body weight card on Home.')}>
           <Switch checked={S.showWeightCard !== false} onChange={v => update(s => { s.showWeightCard = v })} />
         </Row>
@@ -867,12 +867,12 @@ export default function Settings({ page = null, find = null, via = null, entryKe
       <Section footer={MOBILE ? (selfUpdate ? t('Releases are checked on GitHub. The download is verified against its checksum before the installer opens.') : null) : t('The web app updates together with your server. The Android app installs its own updates from here.')}>
         <Row icon="info" iconTint="var(--grey)" title={t('Version')} value={'v' + __APP_VERSION__} />
         {MOBILE
-          ? selfUpdate && <Row icon="download" iconTint="var(--green)"
+          ? selfUpdate && <Row icon="download" iconTint="var(--acc)"
               title={updateInfo?.hasUpdate ? t('Update to openGym v{0}', updateInfo.latestVersion) : t('Check for updates')}
               subtitle={checking ? t('Checking…') : t('You have v{0}', __APP_VERSION__)}
               accessory="chevron"
               onClick={() => (updateInfo?.hasUpdate ? onUpdateRowClick() : checkNow())} />
-          : <Row icon="download" iconTint="var(--green)" title={t('Get the Android app')}
+          : <Row icon="download" iconTint="var(--acc)" title={t('Get the Android app')}
               subtitle={t('Download the APK from opengym.ch')} accessory="chevron"
               onClick={() => window.open('https://opengym.ch/#download', '_blank', 'noopener')} />}
       </Section>
@@ -1325,7 +1325,7 @@ function AccentSwatches({ S, update }) {
   // The input is not controlled (React would put the saved colour back after every drag step);
   // a colour changed elsewhere (sync, another tab) is put in by hand.
   useEffect(() => {
-    if (!pending.current && inputRef.current) inputRef.current.value = own || '#30d158'
+    if (!pending.current && inputRef.current) inputRef.current.value = own || '#00e0d0'
   }, [own])
   const ownLabel = t('Your own color')
   const grey = own && isGrey(own)
@@ -1343,7 +1343,7 @@ function AccentSwatches({ S, update }) {
         ? <button className="swatch swatch-own" style={{ background: own }} onClick={() => pickOwn(own)} aria-label={ownLabel} />
         : <span className={'swatch swatch-own' + (own ? ' on' : ' unset')} style={own ? { background: own, color: inkOn(own) } : undefined}>
           {own ? <Icon name="pencil" /> : <Icon name="plus" />}
-          <input ref={inputRef} type="color" className="swatch-input" defaultValue={own || '#30d158'}
+          <input ref={inputRef} type="color" className="swatch-input" defaultValue={own || '#00e0d0'}
             onChange={e => preview(e.target.value)}
             aria-label={own ? t('Change your own color') : t('Pick your own color')} />
         </span>}

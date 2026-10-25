@@ -1900,6 +1900,7 @@ export default {
   'Flash the screen': 'Bildschirm blinken lassen',
   'Version': 'Version',
   'Source code': 'Quellcode',
+  'This server runs an unofficial, modified copy.': 'Auf diesem Server läuft eine inoffizielle, geänderte Kopie.',
   '{0} rest': '{0} Pause',
   'No rest timer': 'Kein Pausen-Timer',
   'Buttons, timed sets': 'Knöpfe, Zeitsätze',

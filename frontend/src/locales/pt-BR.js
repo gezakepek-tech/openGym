@@ -41,6 +41,7 @@ export const PT_BR_OVERRIDES = {
   'Press back again to exit': 'Pressione voltar novamente para sair',
   'Reps up to': 'Reps até',
   'Delete': 'Excluir',
+  'This server runs an unofficial, modified copy.': 'Este servidor executa uma cópia não oficial e modificada.',
   'Save': 'Salvar',
   'Log': 'Registrar',
   'Settings': 'Configurações',

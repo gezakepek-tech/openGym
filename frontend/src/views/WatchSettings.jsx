@@ -60,7 +60,7 @@ export default function WatchSettingsPage() {
     </Section>
     {prefs.enabled && <>
       <Section footer={t('Start a workout on the phone and openGym pops up on your wrist.')}>
-        <Row icon="bolt" iconTint="var(--green)" title={t('Open on the watch')}>
+        <Row icon="bolt" iconTint="var(--acc)" title={t('Open on the watch')}>
           <Switch checked={prefs.autoShow} onChange={v => set({ autoShow: v })} aria-label={t('Open on the watch')} />
         </Row>
       </Section>

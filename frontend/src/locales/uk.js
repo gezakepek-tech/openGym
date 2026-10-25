@@ -1874,6 +1874,7 @@ export default {
   'Flash the screen': 'Блимати екраном',
   'Version': 'Версія',
   'Source code': 'Вихідний код',
+  'This server runs an unofficial, modified copy.': 'Цей сервер працює на неофіційній зміненій копії.',
   '{0} rest': 'відпочинок {0}',
   'No rest timer': 'Без таймера',
   'Buttons, timed sets': 'Кнопки, підходи на час',

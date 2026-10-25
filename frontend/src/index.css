@@ -42,8 +42,8 @@
   --purple:#bf5af2; --mint:#63e6e2; --brown:#ac8e68; --grey:#8e8e93;
 
   /* accent (per-account, synced) */
-  --acc:  var(--green);
-  --acc-2:#248a3d;
+  --acc:  #00e0d0;
+  --acc-2:#00a396;
   --on-acc:#000000;
   --acc-soft: color-mix(in srgb, var(--acc) 16%, transparent);
   --acc-line: color-mix(in srgb, var(--acc) 38%, transparent);
@@ -87,7 +87,7 @@
   --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#ff9500;
   --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
   --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#8e8e93;
-  --acc-2:#248a3d;
+  --acc-2:#007e76;
   --on-acc:#ffffff;
 }
 
@@ -98,20 +98,21 @@
 :root[data-accent="violet"]{ --acc:var(--purple); --acc-2:#8944ab; --on-acc:#fff }
 :root[data-accent="pink"]  { --acc:var(--pink);   --acc-2:#d70036; --on-acc:#fff }
 :root[data-accent="red"]   { --acc:var(--red);    --acc-2:#d70015; --on-acc:#fff }
-:root[data-accent="teal"]  { --acc:var(--teal);   --acc-2:#0071a4; --on-acc:#000 }
+:root[data-accent="teal"]  { --acc:#00e0d0;     --acc-2:#00a396; --on-acc:#000 }
 :root[data-accent="gold"]  { --acc:var(--yellow); --acc-2:#b25000; --on-acc:#000; --knob-ring:rgba(0,0,0,.28) }
 /* Label colour on a filled accent button is picked per accent by measured contrast,
    not by taste. Button text is 17px/600, so the AA bar is 3:1 (large text). White on
-   the light-theme green is 2.22:1 and on teal 2.57:1 — both fail, and green is the
-   DEFAULT accent, so every primary button in light mode was failing. Black scores
-   9.46 / 8.16 there. Blue, purple, pink and red keep white (3.5–4.1:1), which both
-   passes and matches the platform convention. */
-:root[data-theme="light"][data-accent="lime"],
-:root[data-theme="light"][data-accent="teal"]  { --on-acc:#000 }
+   the light-theme green is 2.22:1 — it fails, so green takes black there (9.46:1).
+   Blue, purple, pink and red keep white (3.5–4.1:1), which both passes and matches the
+   platform convention. */
+:root[data-theme="light"][data-accent="lime"]  { --on-acc:#000 }
 :root[data-theme="light"][data-accent="sky"],
 :root[data-theme="light"][data-accent="violet"],
 :root[data-theme="light"][data-accent="pink"],
 :root[data-theme="light"][data-accent="red"]   { --on-acc:#fff }
+/* The turquoise is the one accent whose light shade is dark enough that black would fail it
+   (4.25:1) while white passes (4.95:1), so light mode draws the deeper shade with white ink. */
+:root[data-theme="light"][data-accent="teal"]  { --acc:#007e76; --acc-2:#005f5a; --on-acc:#fff }
 
 /* ---------------------------------------------------------------- reset -- */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -124,7 +125,9 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif;
   font-size:17px;line-height:1.29;letter-spacing:-.01em;
   min-height:100vh;min-height:100dvh;overscroll-behavior-y:none;overflow-x:clip;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  /* No font-smoothing override. The antialiased/grayscale pair this file used to set thins every
+     glyph — that is what made the app's text read as washed out and blurry on Windows and iOS.
+     The platform's own rasterisation is the crisper one, so nothing is set here. */
   touch-action:manipulation;
   font-variant-numeric:tabular-nums;
 }

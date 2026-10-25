@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': 'स्क्रीन चमकाएँ',
   'Version': 'संस्करण',
   'Source code': 'सोर्स कोड',
+  'This server runs an unofficial, modified copy.': 'यह सर्वर एक अनौपचारिक, संशोधित प्रति चलाता है।',
   '{0} rest': '{0} आराम',
   'No rest timer': 'आराम टाइमर नहीं',
   'Buttons, timed sets': 'बटन, समय वाले सेट',

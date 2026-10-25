@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': 'Mignij ekranem',
   'Version': 'Wersja',
   'Source code': 'Kod źródłowy',
+  'This server runs an unofficial, modified copy.': 'Ten serwer uruchamia nieoficjalną, zmodyfikowaną kopię.',
   '{0} rest': '{0} przerwy',
   'No rest timer': 'Bez minutnika',
   'Buttons, timed sets': 'Przyciski, serie na czas',

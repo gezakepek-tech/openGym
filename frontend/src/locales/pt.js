@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': 'Piscar o ecrã',
   'Version': 'Versão',
   'Source code': 'Código-fonte',
+  'This server runs an unofficial, modified copy.': 'Este servidor executa uma cópia não oficial e modificada.',
   '{0} rest': '{0} de descanso',
   'No rest timer': 'Sem temporizador',
   'Buttons, timed sets': 'Botões, séries por tempo',

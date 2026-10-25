@@ -100,7 +100,7 @@ export function buildWidgetSnapshot (S, { today = todayISO() } = {}) {
     weekFrom,
     weekUntil: shift(weekFrom, 7),
     unit: st.unit === 'lb' ? 'lb' : 'kg',
-    accent: pair?.accent || '#30d158',
+    accent: pair?.accent || '#00e0d0',
     ink: pair?.ink || '#000000',
     days,
     week: { done: week.done || 0, planned: week.planned || 0 },

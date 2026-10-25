@@ -3,7 +3,7 @@
 // Stored as two synced settings: `accent` names the choice ('lime', 'sky', … or 'custom') and
 // `accentCustom` keeps the user's own colour as '#rrggbb', also while a preset is picked, so
 // going back to it brings the same colour back. An app from before this knows no 'custom' and
-// draws its default green (App.jsx falls back on any key it does not know), and leaves
+// draws its default accent (App.jsx falls back on any key it does not know), and leaves
 // `accentCustom` alone like any other key it does not read.
 //
 // Nothing here trusts the stored value: it comes from other devices, backups and the server, and
@@ -16,7 +16,7 @@
 // A grey goes further, so it never looks like a switched-off button (THEMES below, accent.test.js).
 import { ACCENTS, ACCENT_INK } from './format.js'
 
-export const DEFAULT_ACCENT = 'lime'
+export const DEFAULT_ACCENT = 'teal'
 export const CUSTOM = 'custom'
 
 const HEX = /^#[0-9a-f]{6}$/i

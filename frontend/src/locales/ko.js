@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': '화면 깜빡이기',
   'Version': '버전',
   'Source code': '소스 코드',
+  'This server runs an unofficial, modified copy.': '이 서버는 비공식적으로 수정된 사본을 실행합니다.',
   '{0} rest': '휴식 {0}',
   'No rest timer': '휴식 타이머 없음',
   'Buttons, timed sets': '버튼, 시간 세트',
