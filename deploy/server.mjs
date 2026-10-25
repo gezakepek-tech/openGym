@@ -12,6 +12,10 @@
      RP_ID      passkey hostname, e.g. active.example.com
      ORIGIN     public origin, e.g. https://active.example.com
      RP_NAME    display name in the passkey prompt (default openGym)
+     SITE_USER + SITE_PASS  close the whole site behind one password
+     MEDIA_TOKEN  a key for /t/<token>/still|clip/<id>.* — what a packaged app uses to reach the
+                  media without the site password (see MEDIA below)
+     MEDIA_OPEN 1  serve the media openly on a public instance instead (default: only when closed)
 */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -43,6 +47,11 @@ const GATE = !!(SITE_USER && SITE_PASS);
 // publishes the 180 px set by accident.
 const MEDIA_PUBLIC = /^(1|true|yes|on)$/i.test(process.env.MEDIA_OPEN || '');
 const MEDIA_ON = GATE || MEDIA_PUBLIC;
+// A packaged app cannot answer the site's password prompt (a WebView has no dialog for it) and may
+// not carry the media inside the package (catalogue/media/NOTICE.md: a third party may not ship
+// them), so it holds a key to this server instead: /t/<token>/still|clip/<id>.* is served without
+// the password, to whoever presents the token. Unset, those URLs do not exist.
+const MEDIA_TOKEN = process.env.MEDIA_TOKEN || '';
 
 function sameSecret(given, expected) {
   const a = Buffer.from(String(given));
@@ -113,8 +122,20 @@ async function serveStatic(req, res, pathname) {
   const urlPath = decodeURIComponent(pathname);
   const rel = urlPath.replace(/^\/+/, '');
   // /exercise-media/<still|clip>/<id>.<ext> comes from catalogue/media, everything else from dist.
-  const mediaRel = rel.startsWith('exercise-media/') ? rel.slice('exercise-media/'.length) : null;
-  if (mediaRel !== null && !MEDIA_ON) {
+  // /t/<token>/<still|clip>/<id>.<ext> is the same tree for a packaged app that holds the token.
+  let mediaRel = rel.startsWith('exercise-media/') ? rel.slice('exercise-media/'.length) : null;
+  const tokenPath = /^t\/([^/]+)\/(.+)$/.exec(rel);
+  if (tokenPath) {
+    if (!MEDIA_TOKEN || !sameSecret(tokenPath[1], MEDIA_TOKEN)) {
+      res.writeHead(403, { 'content-type': 'text/plain; charset=utf-8' }).end('forbidden');
+      return;
+    }
+    mediaRel = tokenPath[2];
+    // A packaged app runs on its own origin (capacitor://localhost), so its media fetch is
+    // cross-origin; without this the prefetch and the clip-in-memory read would be blocked.
+    res.setHeader('access-control-allow-origin', '*');
+  }
+  if (mediaRel !== null && !MEDIA_ON && !tokenPath) {
     res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('not found');
     return;
   }
@@ -172,7 +193,8 @@ async function serveStatic(req, res, pathname) {
 
 function route(req, res) {
   const pathname = (req.url || '/').split('?')[0];
-  if (!authorized(req)) {
+  // The token path carries its own credential and is checked in serveStatic.
+  if (!authorized(req) && !pathname.startsWith('/t/')) {
     res.writeHead(401, {
       'www-authenticate': 'Basic realm="openGym", charset="UTF-8"',
       'content-type': 'text/plain; charset=utf-8',

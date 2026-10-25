@@ -38,6 +38,16 @@ jobs:
 
       - name: Build the bundle without the media, and copy it into the Android project
         working-directory: frontend
+        env:
+          # Optional: point the packaged app at an instance that serves the media to a token holder
+          # (deploy/server.mjs: MEDIA_TOKEN, then /t/<token>/still|clip/<id>.* ). Set the two repo
+          # variables MEDIA_STILL_BASE and MEDIA_CLIP_BASE, e.g.
+          #   https://active.example.com/t/<token>/still/
+          #   https://active.example.com/t/<token>/clip/
+          # Left unset they are empty, the app falls back to the relative default and the bundle
+          # stays media-free. The token travels inside the APK, so hand the package to nobody.
+          VITE_IMG_BASE: ${{ vars.MEDIA_STILL_BASE }}
+          VITE_GIF_BASE: ${{ vars.MEDIA_CLIP_BASE }}
         run: npm run build:mobile-nomedia
 
       - name: Build the APK (debug, sideload flavour)
