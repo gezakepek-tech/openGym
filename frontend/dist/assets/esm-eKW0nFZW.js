@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./web-C48Foyti.js","./dist-DpEKHzv0.js"])))=>i.map(i=>d[i]);
+import{t as e}from"./preload-helper-HclGiUj8.js";import{registerPlugin as t}from"./dist-DpEKHzv0.js";var n=t(`App`,{web:()=>e(()=>import(`./web-C48Foyti.js`).then(e=>new e.AppWeb),__vite__mapDeps([0,1]),import.meta.url)});export{n as App};

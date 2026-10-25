@@ -1,4 +1,15 @@
 {
+  "name": "opengym-deploy",
+  "private": true,
+  "description": "Single-process entry point (deploy/server.mjs) for PaaS hosts that run one Node app per website. Docker and NixOS installs ignore this file.",
+  "scripts": {
+    "build": "npm --prefix api ci --omit=dev --omit=optional --no-audit --no-fund",
+    "build:frontend": "npm --prefix frontend ci --no-audit --no-fund && npm --prefix frontend run build",
+    "start": "node deploy/server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "js-yaml": "^4.1.0"
   }
