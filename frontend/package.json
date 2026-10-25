@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:mobile": "VITE_MOBILE=1 vite build && node ../scripts/catalogue/stage-media.mjs dist && cap sync && node scripts/check-mobile-bundle.mjs",
+    "build:mobile-nomedia": "VITE_MOBILE=1 vite build && cap sync android && node scripts/check-mobile-bundle.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -1,0 +1,52 @@
+# Builds an installable Android package for this fork — manually, from the Actions tab.
+#
+# Why the exercise media stays out of it: the stills and animations are licensed to openGym by
+# Gym visual (catalogue/media/NOTICE.md) and a third party may not put them into a package it
+# distributes. The bundle is complete without them — components/Media.jsx falls back from the
+# animation to the still and then to a neutral tile — so the APK works, and whoever may see the
+# animations gets them from the instance they can sign in to (deploy/server.mjs, SITE_USER+SITE_PASS).
+#
+# The debug build carries the ".test" applicationIdSuffix (android/app/build.gradle), so it
+# installs next to the official openGym instead of over it, and Android's build tools sign it with
+# the debug key: install by hand, not a Play upload. A Play release would need a keystore this
+# repository does not hold.
+name: Android package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install the web app's dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build the bundle without the media, and copy it into the Android project
+        working-directory: frontend
+        run: npm run build:mobile-nomedia
+
+      - name: Build the APK (debug, sideload flavour)
+        working-directory: frontend/android
+        run: ./gradlew assembleSideloadDebug --no-daemon --stacktrace
+
+      - name: Keep the APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: opengym-hu-debug-apk
+          path: frontend/android/app/build/outputs/apk/sideload/debug/app-sideload-debug.apk
+          if-no-files-found: error
