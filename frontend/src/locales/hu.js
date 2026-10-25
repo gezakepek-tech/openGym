@@ -1880,6 +1880,7 @@ export default {
   'Flash the screen': 'Villogjon a képernyő',
   'Version': 'Verzió',
   'Source code': 'Forráskód',
+  'This server runs an unofficial, modified copy.': 'Ez a szerver egy nem hivatalos, módosított példány.',
   '{0} rest': '{0} pihenő',
   'No rest timer': 'Nincs pihenő időzítő',
   'Buttons, timed sets': 'Gombok, időre menő sorozatok',
