@@ -1,28 +1,32 @@
 /* Mounts the API inside this process instead of spawning it.
 
-   Hostinger's Node.js hosting runs one app process per website behind Passenger, which honours a
-   single listen() per process, and its loopback is not reachable between processes: a spawned API
-   child logged "gym-api on :PORT" while this process got ECONNREFUSED on every address family.
-   So the API is not proxied at all — its request handler is mounted directly.
+   Why: Hostinger's Node.js hosting runs one app process per website behind Passenger, and
+   Passenger replaces http.Server.prototype.listen with its own (measured: patching only
+   net.Server.prototype.listen had no effect, the API's call still bound, and the app's own
+   listen was refused with "http.Server.listen() was called more than once, ignore."). A spawned
+   API child is not an option either: the app process cannot reach it over loopback.
 
-   api/server.js ends with `server.listen(PORT, cb)` and the callback logs `server.address().port`.
-   That call is intercepted here (it never binds), and a stand-in address is provided for the
-   duration of the callback. Everything else in api/ runs unchanged, so this survives upstream
-   updates; docker-compose.yml and the NixOS module never load this file. */
+   So this file takes over the API's listen() call: the server object is captured and never binds,
+   a stand-in address is supplied for the callback that logs server.address().port, and the API's
+   request listener is detached so the caller can route /api/* to it from the one server that does
+   listen. api/ itself is imported unchanged, so this survives upstream updates; docker-compose.yml
+   and the NixOS module never load this file. */
+import http from 'node:http';
 import net from 'node:net';
 
-const originalListen = net.Server.prototype.listen;
-let apiServer = null;
+const savedHttpListen = http.Server.prototype.listen;
+const savedNetListen = net.Server.prototype.listen;
+let captured = null;
 
-net.Server.prototype.listen = function listen(...args) {
+function intercept(...args) {
   const [first] = args;
   const port = typeof first === 'number' ? first
     : first && typeof first === 'object' && typeof first.port === 'number' ? first.port : null;
 
   // A Unix socket path or a handle is not something this file takes over.
-  if (port === null) return originalListen.apply(this, args);
+  if (port === null) return savedHttpListen.apply(this, args);
 
-  if (!apiServer) apiServer = this;
+  if (!captured) captured = this;
 
   const callback = args.find(a => typeof a === 'function');
   if (callback) {
@@ -31,14 +35,20 @@ net.Server.prototype.listen = function listen(...args) {
     try { callback(); } finally { this.address = realAddress; }
   }
   return this;
-};
+}
 
 export async function mountApi() {
+  http.Server.prototype.listen = intercept;
+  net.Server.prototype.listen = intercept;
   try {
     await import('../api/server.js');
   } finally {
-    // Restored before the caller creates the public server, so that one listen() is a real bind.
-    net.Server.prototype.listen = originalListen;
+    http.Server.prototype.listen = savedHttpListen;
+    net.Server.prototype.listen = savedNetListen;
   }
-  return apiServer;
+  if (!captured) return null;
+
+  const handlers = captured.rawListeners('request');
+  captured.removeAllListeners('request');
+  return { server: captured, handlers };
 }

@@ -62,11 +62,13 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
-const apiServer = await mountApi();
-if (apiServer) {
-  console.log(`[deploy] api mounted in this process (${apiServer.listenerCount('request')} request listener(s)), data ${DATA_DIR}`);
+const mounted = await mountApi();
+const apiServer = mounted?.server ?? http.createServer();
+const apiHandlers = mounted?.handlers ?? [];
+if (mounted) {
+  console.log(`[deploy] api mounted in this process (${apiHandlers.length} request listener(s)), data ${DATA_DIR}`);
 } else {
-  console.error('[deploy] the API registered no listener; /api/* will answer 503');
+  console.error('[deploy] the API never called listen(); /api/* will answer 503');
 }
 
 async function serveStatic(req, res, pathname) {
@@ -105,17 +107,17 @@ async function serveStatic(req, res, pathname) {
   fs.createReadStream(file).on('error', () => res.destroy()).pipe(res);
 }
 
-const server = http.createServer((req, res) => {
+function route(req, res) {
   const pathname = (req.url || '/').split('?')[0];
   if (pathname === '/api' || pathname.startsWith('/api/')) {
-    if (!apiServer) {
+    if (!apiHandlers.length) {
       res.writeHead(503, { 'content-type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: 'api unavailable', code: 'api-not-mounted' }));
       return;
     }
     // The API's own handler: same request and response objects, so cookies, uploads and streaming
     // behave exactly as they do behind nginx.
-    apiServer.emit('request', req, res);
+    for (const handler of apiHandlers) handler.call(apiServer, req, res);
     return;
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -126,19 +128,22 @@ const server = http.createServer((req, res) => {
     console.error('[deploy] static error:', e);
     if (!res.headersSent) res.writeHead(500).end('internal error');
   });
-});
+}
 
-server.keepAliveTimeout = 65_000;
-server.headersTimeout = 70_000;
-server.on('error', (e) => console.error('[deploy] public server error:', e));
+// One server object for both halves: a Passenger-style wrapper binds only the server it sees
+// listen(), so serving static files from a second one would leave them unreachable.
+apiServer.on('request', route);
+apiServer.keepAliveTimeout = 65_000;
+apiServer.headersTimeout = 70_000;
+apiServer.on('error', (e) => console.error('[deploy] public server error:', e));
 
 console.log(`[deploy] PORT env=${JSON.stringify(process.env.PORT)} -> listening on ${PORT}`);
-server.listen(PORT, () => console.log(`[deploy] web on :${PORT}, serving ${DIST}`));
+apiServer.listen(PORT, () => console.log(`[deploy] web on :${PORT}, serving ${DIST}`));
 
 for (const sig of ['SIGTERM', 'SIGINT']) {
   process.on(sig, () => {
     console.log(`[deploy] ${sig}: shutting down`);
-    server.close(() => process.exit(0));
+    apiServer.close(() => process.exit(0));
     setTimeout(() => process.exit(0), 5000).unref();
   });
 }
