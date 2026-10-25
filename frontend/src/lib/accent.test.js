@@ -28,6 +28,14 @@ describe('sanitizeAccent', () => {
     expect(sanitizeAccent({ accent: 42 }).accent).toBe('teal')
     expect(sanitizeAccent({ theme: 'dark' })).toEqual({ theme: 'dark' })
   })
+  it('moves the seed state’s unchosen green to the default', () => {
+    expect(sanitizeAccent({ accent: 'lime' }).accent).toBe('teal')
+    expect(sanitizeAccent({ accent: 'lime', edited: { unit: 5 } }).accent).toBe('teal')
+  })
+  it('keeps a green somebody picked', () => {
+    expect(sanitizeAccent({ accent: 'lime', edited: { accent: 20 } }).accent).toBe('lime')
+    expect(sanitizeAccent({ accent: 'sky', edited: { accent: 20 } }).accent).toBe('sky')
+  })
 })
 
 describe('accentKey / accentValue', () => {

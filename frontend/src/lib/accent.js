@@ -40,6 +40,12 @@ export function sanitizeAccent(s) {
     if (hex) s.accentCustom = hex; else delete s.accentCustom
   }
   if ('accent' in s && !(typeof s.accent === 'string' && KEY.test(s.accent))) s.accent = DEFAULT_ACCENT
+  // The seed state (store/useStore.js DEF) carried the green preset until the turquoise became the
+  // default, so every copy saved before that says 'lime' whether or not anybody picked it. A real
+  // pick is recorded in `edited.accent` (lib/sync-merge.js stampEdits), so an unchosen green moves
+  // to the default once here — every load, merge and backup path runs through this — and a green
+  // picked afterwards keeps its stamp and stays.
+  if (s.accent === 'lime' && !(Number(s.edited?.accent) > 0)) s.accent = DEFAULT_ACCENT
   return s
 }
 
