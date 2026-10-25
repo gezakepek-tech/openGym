@@ -72,6 +72,11 @@ Languages: `ar bn de es fr hi hu it ko pl pt pt-BR ru th tr uk zh zh-TW` (the ap
 Names follow the language's own conventions. German capitalises nouns; the others are stored
 lowercase like English.
 
+Hungarian: `node scripts/catalogue/translate-hu.mjs --dry-run` lists what is still missing and costs
+nothing; without `--dry-run` it fills it from the English source with a fixed glossary (needs
+`GEMINI_API_KEY` or `--provider translate` with `GOOGLE_TRANSLATE_API_KEY`). It only ever adds, never
+overwrites, and every result still needs a human read before it goes upstream.
+
 ## Rules that keep this open
 
 1. **Write it yourself.** Don't copy names, descriptions or steps from other apps, websites, books
