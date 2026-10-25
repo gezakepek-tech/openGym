@@ -31,6 +31,10 @@ function resolvePort(raw) {
 const PORT = resolvePort(process.env.PORT);
 const DATA_DIR = process.env.DATA_DIR || path.join(root, 'data');
 
+// The API binds the wildcard address of the address family Node picks, which on some hosts is
+// IPv6-only ([::] with bindv6only=1). Probe and talk to both loopbacks, not just 127.0.0.1.
+const LOOPBACKS = ['127.0.0.1', '::1'];
+
 if (!fs.existsSync(path.join(DIST, 'index.html'))) {
   console.error(`[deploy] no built frontend at ${DIST} — run "npm run build" first`);
   process.exit(1);
@@ -58,36 +62,48 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
-function pickApiPort(start) {
-  return new Promise((resolve, reject) => {
-    let port = start;
-    const attempt = () => {
-      if (port >= start + 20) return reject(new Error(`no free loopback port in ${start}..${start + 19}`));
-      // An outgoing connect, never listen(): Passenger-like wrappers allow only one listen() per
-      // process, and that one belongs to the public server below.
-      const sock = net.connect({ host: '127.0.0.1', port });
-      const settle = (free) => {
-        sock.removeAllListeners();
-        sock.destroy();
-        if (free) resolve(port);
-        else { port += 1; attempt(); }
-      };
-      sock.setTimeout(400, () => settle(true));
-      sock.once('connect', () => settle(false));
-      sock.once('error', () => settle(true));
+function reachable(host, port) {
+  return new Promise((resolve) => {
+    // An outgoing connect, never listen(): a wrapper such as Passenger allows only one listen()
+    // per process, and that one belongs to the public server.
+    const sock = net.connect({ host, port });
+    const settle = (ok) => {
+      sock.removeAllListeners();
+      sock.destroy();
+      resolve(ok);
     };
-    attempt();
+    sock.setTimeout(400, () => settle(false));
+    sock.once('connect', () => settle(true));
+    sock.once('error', () => settle(false));
   });
+}
+
+async function portInUse(port) {
+  for (const host of LOOPBACKS) {
+    if (await reachable(host, port)) return true;
+  }
+  return false;
+}
+
+async function pickApiPort(start) {
+  for (let port = start; port < start + 20; port += 1) {
+    if (!(await portInUse(port))) return port;
+  }
+  throw new Error(`no free loopback port in ${start}..${start + 19}`);
 }
 
 let child = null;
 let childPort = 0;
+let apiHost = LOOPBACKS[0];
 let stopping = false;
-let nextApiPort = +(process.env.API_PORT || 3901);
+// A per-process base port keeps a leftover child of an earlier app process from colliding with
+// this one; the address probe and the restart loop handle the rest.
+let nextApiPort = +(process.env.API_PORT || 0) || 20000 + (process.pid % 400) * 10;
 
 async function startApi() {
   childPort = await pickApiPort(nextApiPort);
   nextApiPort = childPort + 1;
+  apiHost = LOOPBACKS[0];
 
   // A wrapper such as Passenger exports its own loader and socket details; a grandchild must not
   // inherit them, or its listen() is intercepted too.
@@ -112,7 +128,7 @@ async function startApi() {
     console.error(`[deploy] api exited (code=${code} signal=${signal}); restarting in 1s`);
     setTimeout(() => { startApi().catch(e => console.error('[deploy] api restart failed:', e)); }, 1000);
   });
-  console.log(`[deploy] api on 127.0.0.1:${childPort}, data ${DATA_DIR}`);
+  console.log(`[deploy] api on ${apiHost}:${childPort}, data ${DATA_DIR}`);
 }
 
 function clientIp(req) {
@@ -120,6 +136,13 @@ function clientIp(req) {
   const xff = req.headers['x-forwarded-for'];
   if (typeof xff === 'string' && xff) return xff.split(',')[0].trim();
   return req.socket.remoteAddress || '';
+}
+
+async function detectApiHost() {
+  for (const host of LOOPBACKS) {
+    if (await reachable(host, childPort)) { apiHost = host; return host; }
+  }
+  return null;
 }
 
 function proxy(req, res) {
@@ -133,13 +156,18 @@ function proxy(req, res) {
   headers['x-forwarded-proto'] = (req.headers['x-forwarded-proto'] || 'https').toString().split(',')[0].trim();
   if (req.headers.host) headers['x-forwarded-host'] = req.headers.host;
   const up = http.request(
-    { host: '127.0.0.1', port: childPort, method: req.method, path: req.url, headers },
+    { host: apiHost, port: childPort, method: req.method, path: req.url, headers },
     (upRes) => {
       res.writeHead(upRes.statusCode || 502, upRes.headers);
       upRes.pipe(res);
     },
   );
   up.on('error', (e) => {
+    // Never retried inside one request: the body may already be consumed. The next request uses
+    // whichever loopback the re-probe finds.
+    if (e.code === 'ECONNREFUSED' || e.code === 'ECONNRESET') {
+      detectApiHost().then(h => { if (h) console.log(`[deploy] api host switched to ${h}:${childPort}`); }).catch(() => {});
+    }
     if (!res.headersSent) {
       res.writeHead(502, { 'content-type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ error: 'api unreachable', code: 'api-unreachable', detail: e.code }));
@@ -208,6 +236,14 @@ await startApi();
 server.on('error', (e) => console.error('[deploy] public server error:', e));
 console.log(`[deploy] PORT env=${JSON.stringify(process.env.PORT)} -> listening on ${PORT}`);
 server.listen(PORT, () => console.log(`[deploy] web on :${PORT}, serving ${DIST}`));
+
+// The child needs a moment before it accepts connections; log the address family that answers so
+// a loopback mismatch on the host is visible instead of surfacing as a bare 502.
+for (let i = 0; i < 20; i += 1) {
+  const host = await detectApiHost();
+  if (host) { console.log(`[deploy] api reachable on ${host}:${childPort}`); break; }
+  await new Promise(r => setTimeout(r, 500));
+}
 
 for (const sig of ['SIGTERM', 'SIGINT']) {
   process.on(sig, () => {
