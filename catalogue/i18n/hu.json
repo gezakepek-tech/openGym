@@ -7777,22 +7777,22 @@
     "name": "ugrálás előre",
     "description": "Rövid, ruganyos előre ugrások, amelyek láberőt, robbanékonyságot és koordinációt építenek.",
     "instructions": [
-      "Állj mindkét lábadra enyhén hajlított térddel.",
-      "Lendítsd a karod, és ugorj előre egy rövid távolságot.",
-      "Lépjen puha talppal a lábujjakra.",
-      "Állítsd vissza a testtartásodat, és ugorj újra.",
-      "Tartsd az ugrásokat kontrolláltan, és a mell magas."
+      "Állj mindkét lábadon, enyhén behajlított térdekkel.",
+      "Lendítsd meg a karjaidat, és ugorj előre egy rövid távolságot.",
+      "Érkezz puhán a talppárnáidra.",
+      "Állítsd helyre a testtartásodat, és ugorj újra.",
+      "Tartsd kontrolláltan az ugrásokat, a melledet pedig emeld ki."
     ]
   },
   "1699": {
     "name": "forgató dobás medicinlabdával",
     "description": "Erőteljes rotációs dobás, amely a törzs, a csípő és a vállak együttműködését fejleszti.",
     "instructions": [
-      "Álljon oldalról a falhoz, és tartson egy medicinlabdát a csípőjénél.",
-      "Forduljon el a faltól, és terhelje be a hátsó csípőjét.",
-      "Robbanásszerűen forduljon el, és dobja a labdát a falba.",
-      "Fogd el a visszapattanáskor, és ismételd meg.",
-      "Váltson oldalt a tervezett ismétlés után."
+      "Állj oldalvást a falnak, egy medicinlabdát a csípődnél tartva.",
+      "Fordulj el a faltól, és terheld meg a hátsó csípődet.",
+      "Robbanékonyan fordulj el, és dobd a labdát a falba.",
+      "Kapd el a visszapattanó labdát, és ismételd meg.",
+      "A tervezett ismétlések után válts oldalt."
     ]
   },
   "1700": {
@@ -7819,33 +7819,33 @@
     "name": "féllábas lábérintés",
     "description": "Egylábas egyensúlyozó gyakorlat, amelyben a padló vagy a lábfej megérintésére törekszel, fejlesztve a csípőkontrollt és a stabilitást.",
     "instructions": [
-      "Álljon az egyik lábán puha térddel.",
-      "Hajlítson a csípőnél, és nyúljon le a lábfeje vagy a padló felé.",
-      "Tartsa a hátát simán, és a szabad lábát nyújtsa ki maga mögött.",
-      "Térjen vissza álló helyzetbe a farizom megfeszítésével.",
-      "Végezze el az összes ismétlés-t, majd váltson lábat."
+      "Állj egy lábon, enyhén hajlított térddel.",
+      "Hajolj csípőből, és nyúlj le a lábad vagy a padló felé.",
+      "Tartsd egyenesen a hátadat, a szabad lábadat pedig nyújtsd ki magad mögött.",
+      "A farizom megfeszítésével térj vissza álló helyzetbe.",
+      "Fejezd be az összes ismétlést, majd válts lábat."
     ]
   },
   "1703": {
     "name": "féllábas keresztirányú hajlás",
     "description": "Egylábas hajlítás csavarintéssel, amely az egyensúlyt és a mobilitást fejleszti a csípőn és a törzsön keresztül.",
     "instructions": [
-      "Álljon az egyik lábán puha térddel.",
-      "Hajlítsa előre a csípőjét, és nyúljon át a testén.",
-      "Nyúlás közben kissé fordítsa el a törzsét.",
-      "Térjen vissza álló helyzetbe irányítással.",
-      "Végezze el az ismétlés-t, majd váltson lábat."
+      "Állj egy lábon, enyhén hajlított térddel.",
+      "Hajolj előre csípőből, és nyúlj át a tested előtt.",
+      "Nyúlás közben kissé fordítsd el a törzsedet.",
+      "Kontrolláltan térj vissza álló helyzetbe.",
+      "Végezd el az ismétléseket, majd válts lábat."
     ]
   },
   "1704": {
     "name": "féllábas favágás medicinlabdával",
     "description": "Egy lábon végzett fatörzsvágás, amely egyensúlyi kihívással nehezíti a törzsfordítást.",
     "instructions": [
-      "Álljon az egyik lábán, és tartson egy medicinlabdát a feje fölött az egyik oldalon.",
-      "Vágja le a labdát átlósan lefelé a testén.",
-      "Forgassa el a törzsét, és fordítsa el az álló lábát.",
-      "Irányítással vigye vissza a labdát a fej fölé.",
-      "Végezze el az ismétlés-t, majd váltson lábat."
+      "Állj egy lábon, egy medicinlabdát a fejed felett az egyik oldalra tartva.",
+      "Vidd le a labdát átlósan a tested előtt.",
+      "Fordítsd el a törzsedet, és fordítsd el a tartólábadat.",
+      "Kontrolláltan emeld vissza a labdát a fejed fölé.",
+      "Végezd el az ismétléseket, majd válts lábat."
     ]
   },
   "1705": {
@@ -7865,11 +7865,11 @@
     "name": "alkartámasz plank stabilitási labdán",
     "description": "Alkartámasz a könyököket egy stabilitási labdán tartva. A billegő felület miatt a hasizmaidnak és a vállaidnak keményebben kell dolgozniuk az egyenes vonal megtartásáért.",
     "instructions": [
-      "Térdeljen egy stabilitási labda mögé, és helyezze rá az alkarját.",
-      "Sétáljon vissza a lábával, amíg a teste egyenes vonalat nem alkot a fejtől a sarokig.",
-      "Feszítsd meg a hasizom-et, és szorítsd össze a farizom-et.",
-      "Tartsa a nyakát semlegesen, és ügyeljen arra, hogy a csípője ne süllyedjen vagy emelkedjen meg.",
-      "Tartsa 20-40 másodpercig, majd ereszkedjen le a padlóra."
+      "Térdelj egy stabilitási labda mögé, és helyezd rá az alkarodat.",
+      "Lépkedj hátra a lábaiddal, amíg a tested egyenes vonalat nem alkot a fejedtől a sarkadit.",
+      "Feszítsd meg a hasizmodat, és szorítsd össze a farizmodat.",
+      "Tartsd a nyakadat természetes helyzetben, és ne engedd a csípődet megereszkedni vagy felemelkedni.",
+      "Tartsd meg 20-40 másodpercig, majd engedd le magad a padlóra."
     ]
   },
   "1707": {
@@ -7922,11 +7922,11 @@
     "name": "segített ferde hasizom és farizom nyújtás",
     "description": "Partner által segített nyújtás a külső csípőre és a törzs oldalára. Enyhíti a feszültséget a kis farizmokban és a haránthasizmokban.",
     "instructions": [
-      "Feküdj a hátadon vagy az oldaladon, miközben a partnered tartja a felső lábadat.",
-      "Kérje meg partnerét, hogy óvatosan vezesse át a lábát a testén, miközben Ön nyugodt marad.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Feküdj a hátadra vagy az oldaladra, miközben a partnered megtámasztja a felül lévő lábadat.",
+      "Kérd meg a partneredet, hogy óvatosan vezesse át a lábadat a tested felett, miközben te lazán maradsz.",
+      "Tartsd lazán a válladat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig, rugózás nélkül.",
+      "Óvatosan engedd el és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1712": {
@@ -7967,11 +7967,11 @@
     "name": "segített ferde hasizom és széles hátizom nyújtás stabilitási labdán",
     "description": "Egy stabilitási labdára dőlve, partner segítségével megnyújtod a törzsed oldalát és a széles hátizmodat. Ez nyitja az egész oldalsó testtájat.",
     "instructions": [
-      "Feküdjön oldalra egy stabilitási labdán, megtámasztott csípővel, és az egyik karját nyújtsa a feje fölé.",
-      "Hagyja, hogy a partnere óvatosan tovább vezesse a nyúló karját, miközben kissé átgördül a labdán.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Feküdj oldalasan egy stabilitási labdára úgy, hogy a csípőd megtámasztva legyen, és az egyik karoddal nyújtózz a fejed fölé.",
+      "Engedd, hogy a partnered óvatosan tovább vezesse a kinyújtott karodat, miközben kissé átgördülsz a labdán.",
+      "Tartsd lazán a válladat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig, rugózás nélkül.",
+      "Óvatosan engedd el és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1716": {
@@ -8518,11 +8518,11 @@
     "name": "féllábas guggolás kitámasztással (pisztoly)",
     "description": "Pisztolyguggolás egy támasztékba kapaszkodva az egyensúly megőrzése érdekében. Egylábas erőt és kontrollt épít a segítség nélküli kivitelezéshez.",
     "instructions": [
-      "Álljon egy erős támaszték mellé, és fogja meg egy vagy mindkét kezével.",
-      "Emelje az egyik lábát maga elé, és egyensúlyozzon a másikon.",
-      "Ültesse hátra a csípőjét, hajlítsa be a térdét, és ereszkedjen le addig, ameddig csak tudja irányítani.",
-      "Tartsa lent a sarkát, és a térdét a lábujjak felett tartsa.",
-      "Nyomja át a lábát, hogy felálljon, a támasztékot csak szükség szerint használja, majd váltson lábat."
+      "Állj egy stabil támaszték mellé, és fogd meg az egyik vagy mindkét kezeddel.",
+      "Emeld ki az egyik lábadat magad elé, és egyensúlyozz a másikon.",
+      "Told hátra a csípődet és hajlítsd be a térdedet, leereszkedve annyira, amennyire kontrolláltan tudod.",
+      "Tartsd a sarkadat a talajon, a térded pedig kövesse a lábujjaid vonalát.",
+      "Nyomd fel magad a talpadon keresztül állásba, a támasztékot csak szükség szerint használva, majd cserélj lábat."
     ]
   },
   "1763": {
@@ -8664,110 +8664,110 @@
     "name": "fekvő féllábas csípőnyújtás",
     "description": "Hason fekve emeled fel az egyik nyújtott lábad a földről. Kíméletes terheléssel erősíti a farizmot és a combhajlítókat az alsó hát számára.",
     "instructions": [
-      "Feküdj hasra, nyújtott lábbal, a homlokod a kezeden.",
-      "Szorítsd meg a hasizom-et és a farizom-et.",
-      "Emelje fel az egyik egyenes lábát néhány centiméterre a padlótól.",
-      "Álljon meg egy pillanatra a tetején anélkül, hogy meghajlítaná a derék-ét.",
-      "Engedje le irányítás alatt, és ismételje meg, majd váltson lábat."
+      "Feküdj hason, kinyújtott lábakkal, a homlokodat a kezeidre hajtva.",
+      "Feszítsd meg a hasizmodat és a farizmodat.",
+      "Emeld fel az egyik kinyújtott lábadat néhány centire a talajtól.",
+      "Tarts egy rövid szünetet a felső ponton anélkül, hogy beívelnéd a derekadat.",
+      "Engedd le kontrolláltan, és ismételd meg, majd cserélj lábat."
     ]
   },
   "1777": {
     "name": "mellnyújtás fej fölött",
     "description": "Mindkét kar fej fölé és hátra nyújtása nyitja a mellkast és a vállakat. Könnyű nyújtás a görnyedt testtartás ellensúlyozására.",
     "instructions": [
-      "Álljon egyenesen, fűzze össze az ujjait, majd emelje a karjait a feje fölé.",
-      "Nyomja a karját kissé hátra, és emelje meg a mell-ét anélkül, hogy meghajlítaná a derék-ét.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj egyenesen, kulcsold össze az ujjaidat, majd emeld a karjaidat a fejed fölé.",
+      "Nyomd a karjaidat kissé hátra, és emeld ki a melledet anélkül, hogy beívelnéd a derekadat.",
+      "Tartsd lazán a válladat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig, rugózás nélkül.",
+      "Óvatosan engedd el és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1778": {
     "name": "segített álló mellnyújtás",
     "description": "Álló helyzetben egy társ hátrahúzza a karjaidat, így nyújtva a mellkast. Ez mélyebb nyújtás, mint amit egyedül elérhetsz.",
     "instructions": [
-      "Álljon egyenesen, karjait oldalra tartva, kezeit vállmagasságban vagy valamivel alacsonyabban.",
-      "Kérje meg partnerét, hogy fogja meg a csuklóját, és lassan húzza hátra a karját, amíg meg nem érzi a nyújtást a mell-én.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj egyenesen, a karjaidat nyújtsd oldalra, a kezeidet vállmagasságban vagy kicsit lejjebb tartva.",
+      "Kérd meg a partneredet, hogy fogja meg a csuklódat, és lassan húzza hátra a karjaidat, amíg nyújtást nem érzel a melledben.",
+      "Tartsd lazán a válladat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig, rugózás nélkül.",
+      "Óvatosan engedd el és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1779": {
     "name": "segített ülő mellnyújtás",
     "description": "Ülő helyzetben, egy társ által hátrahúzott karokkal nyújtod a mellkast és a vállak elülső részét. Az ülés stabilan tartja a törzsed.",
     "instructions": [
-      "Üljön egyenesen egy padon vagy széken, kezeit a feje mögött vagy karjait széttárva.",
-      "Kérje meg partnerét, hogy álljon mögé, és finoman húzza hátra a könyökét vagy a csuklóját.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Ülj egyenesen egy padon vagy széken, a kezeidet a fejed mögé téve vagy a karjaidat szélesre tárva.",
+      "Kérd meg a partneredet, hogy álljon mögéd, és óvatosan húzza hátra a könyöködet vagy a csuklódat.",
+      "Tartsd lazán a válladat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig, rugózás nélkül.",
+      "Óvatosan engedd el és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1780": {
     "name": "mellnyújtás hajlított karral",
     "description": "Behajlított kar nyomása falhoz vagy kerethez a mellkas és a váll elülső részének nyújtásához. A kar magasságának változtatása más területet céloz.",
     "instructions": [
-      "Álljon egy fal یا ajtófélfa mellé, és helyezze rá az alkarját úgy, hogy a könyöke 90 fokban legyen behajlítva.",
-      "Lépjen előre, és fordítsa el a testét, amíg meg nem érzi a nyújtást a mell-én.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj egy fal vagy ajtókeret mellé, és helyezd rá az alkarod úgy, hogy a könyököd 90 fokban be van hajlítva.",
+      "Lépj előre, és fordítsd el a tested, amíg nem érzed a nyújtást a melledben.",
+      "Tartsd lazán a vállaidat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig rugózás nélkül.",
+      "Engedd el óvatosan, és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1781": {
     "name": "mellnyújtás sarokban a falnál",
     "description": "Falsarokba dőlve egyszerre nyújthatod a mellkas mindkét oldalát. A sarok segít könnyedén szabályozni a nyújtás mélységét.",
     "instructions": [
-      "Álljon szembe egy falkarimával, és helyezze az alkarját mindkét falra körülbelül vállmagasságban.",
-      "Lépjen előre az egyik lábával, és dőljön a mell-ével a sarokba, amíg nyújtást nem érez.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj szembe egy falsarokkal, és helyezd az alkarjaidat a falakra kb. vállmagasságban.",
+      "Lépj egy lábbal előre, és döntsd a melled a sarok felé, amíg nyújtást nem érzel.",
+      "Tartsd lazán a vállaidat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig rugózás nélkül.",
+      "Engedd el óvatosan, és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1782": {
     "name": "fordított mellnyújtás",
     "description": "A hát mögött kulcsolt és megemelt kezek nyújtják a mellkast és a vállak elülső részét. Klasszikus testtartás javító gyakorlat.",
     "instructions": [
-      "Álljon egyenesen, és kulcsolja össze a kezét a háta mögött nyújtott karral.",
-      "Emelje fel a kezét felfelé és el a testétől, miközben kinyitja a mell-ét.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj egyenesen, és kulcsold össze a kezeidet a hátad mögött kinyújtott karokkal.",
+      "Emeld fel a kezeidet a testedtől eltávolítva, miközben kinyitod a melled.",
+      "Tartsd lazán a vállaidat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig rugózás nélkül.",
+      "Engedd el óvatosan, és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1783": {
     "name": "álló mellnyújtás (bordásfalon)",
     "description": "Bordásfalba kapaszkodva és attól elfordulva nyújthatod a mellkasod és a vállad. A rudak segítségével kiválaszthatod a számodra tökéletes magasságot.",
     "instructions": [
-      "Álljon a fali rudak mellé, és fogjon meg egy rudat körülbelül vállmagasságban az egyik kezével.",
-      "Lassan fordítsa el a testét a rudaktól, amíg meg nem érzi a nyújtást a mell-én.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj a bordafal mellé, és fogj meg egy fokot kb. vállmagasságban az egyik kezeddel.",
+      "Lassan fordítsd el a tested a bordafaltól, amíg nyújtást nem érzel a melledben.",
+      "Tartsd lazán a vállaidat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig rugózás nélkül.",
+      "Engedd el óvatosan, és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1784": {
     "name": "mellnyújtás segített hátrahúzással",
     "description": "Egy társ hátrafelé húzza a karjaidat a mellkas nyújtásának mélyítéséhez. Akkor hatásos, ha nagyobb mozgástartományt szeretnél elérni, mint egyedül.",
     "instructions": [
-      "Álljon vagy üljön egyenesen hátrafelé kinyújtott karral csípőtől vállmagasságig.",
-      "Kérje meg partnerét, hogy fogja meg a csuklóját, és finoman húzza hátra és kissé fel a karját.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Állj vagy ülj egyenesen, hátrahúzott, kinyújtott karokkal csípő- és vállmagasság között.",
+      "Kérd meg a partneredet, hogy fogja meg a csuklóidat, és óvatosan húzza a karjaidat hátra és kissé felfelé.",
+      "Tartsd lazán a vállaidat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig rugózás nélkül.",
+      "Engedd el óvatosan, és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1785": {
     "name": "térdelő mellnyújtás",
     "description": "Térdelő helyzetben előre nyújtott karokkal rácsszerkezetre engedheted le a mellkasod. Nyújtja a mellkast és a vállakat.",
     "instructions": [
-      "Térdeljen egy pad vagy szék elé, és pihentesse rajta az alkarját vagy a kezét.",
-      "Ültesse hátra a csípőjét, és engedje le a mell-ét a padló felé, amíg meg nem érzi a nyújtást.",
-      "Tartsa laza a vállát, és lassú és egyenletes légzését.",
-      "Tartsa 20-30 másodpercig pattogás nélkül.",
-      "Engedje el óvatosan, és ismételje meg, váltson oldalt, ha a nyújtás egyoldalas."
+      "Térdelj le egy pad vagy szék előtt, és pihentesd rajta az alkarjaidat vagy a kezeidet.",
+      "Told hátra a csípődet, és engedd a melled a talaj felé, amíg nem érzed a nyújtást.",
+      "Tartsd lazán a vállaidat, a légzésed pedig legyen lassú és egyenletes.",
+      "Tartsd meg 20-30 másodpercig rugózás nélkül.",
+      "Engedd el óvatosan, és ismételd meg, oldalt váltva, ha a nyújtás egyoldalú."
     ]
   },
   "1786": {
@@ -33503,11 +33503,11 @@
     "name": "súlyzós goblet guggolás 2 mp tartással",
     "description": "Goblet guggolás egy másodperces szünettel az alján. A szünet növeli a láb erejét és a kontrollt a holtponton.",
     "instructions": [
-      "Tartson egy kézisúlyzót függőlegesen a mellkasához mindkét kezével.",
-      "Álljon vállszélességben a lábával, és a lábujjak kissé kifelé nézzenek.",
-      "Guggoljon le magas mellkassal, amíg a combja legalább párhuzamos nem lesz.",
-      "Tartsa az alsó pozíciót két másodpercig.",
-      "Nyomja magát a sarkán keresztül, hogy felálljon."
+      "Tarts egy kézisúlyzót függőlegesen mindkét kezeddel a melledhez szorítva.",
+      "Állj vállszélességű terpeszben, a lábujjak kissé kifelé mutatnak.",
+      "Guggolj le egyenes mellel, amíg a combjaid legalább párhuzamosak nem lesznek a talajjal.",
+      "Tartsd meg az alsó pozíciót két másodpercig.",
+      "Nyomd fel magad a sarkaidon keresztül az álló helyzetbe."
     ]
   },
   "4817": {
@@ -49770,11 +49770,11 @@
     "name": "óra goblet guggolás",
     "description": "Goblet guggolás, amely egy képzeletbeli óra számlapja körül lépked, és több irányból edzi a lábakat.",
     "instructions": [
-      "Tartson egy kézisúlyzót a mellkasánál, és képzeljen el egy órát a padlón maga körül.",
-      "Lépjen a 12 órához, és guggoljon le felemelt mellkassal.",
-      "Álljon fel, és térjen vissza középre.",
-      "Lépjen az óra következő pozíciójába, és guggoljon le újra.",
-      "Dolgozza körbe az órát kontrolláltan, és a következő sorozatban váltson irányt."
+      "Tarts egy kézi súlyzót a mellednél, és képzelj el egy órát a padlón magad körül.",
+      "Lépj 12 óra irányába, és guggolj le emelt mellel.",
+      "Állj fel, és térj vissza a középpontba.",
+      "Lépj az óra következő pozíciójára, és guggolj le ismét.",
+      "Haladj körbe az órán kontrolláltan, és a következő sorozatban válts irányt."
     ]
   },
   "10192": {
@@ -50950,12 +50950,12 @@
     "name": "súlyozott homokzsák román felhúzás",
     "description": "Csípőből hajlítás a combok előtt tartott homokzsákkal. Fejleszti a combhajlítót és a farizmot.",
     "instructions": [
-      "Tartson homokzsákot a combja előtt határozott fogással.",
-      "Álljon a lábát csípőszélességben terpeszben, enyhén hajlított térddel.",
-      "Tolja hátra a csípőjét, és csúsztassa le a zsákot a lábán.",
-      "Engedje le addig, amíg nyúlást nem érez a hátsó combizom területén.",
-      "Tolja előre a csípőjét, hogy egyenesen álljon.",
-      "Tartsa a hátát laposan."
+      "Tarts egy homokzsákot a combjaid előtt stabil fogással.",
+      "Állj csípőszélességű terpeszben, enyhén hajlított térdekkel.",
+      "Told hátra a csípődet, és csúsztasd le a zsákot a lábaidon.",
+      "Engedd lejjebb, amíg nyúlást nem érzel a hátsó combizmaidban.",
+      "Told előre a csípődet, hogy felegyenesedj.",
+      "Tartsd egyenesen a hátadat."
     ]
   },
   "10731": {

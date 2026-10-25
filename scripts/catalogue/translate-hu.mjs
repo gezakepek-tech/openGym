@@ -66,6 +66,9 @@ const LIMIT = Number(arg('limit', 0)) || Infinity;
 const ONLY = (arg('only', '') || '').split(',').map(s => s.trim()).filter(Boolean);
 const WITH_DESC = has('with-descriptions');
 const ONLY_DESC = has('only-descriptions');
+// Re-translates steps that already exist; needed to redo a register or a bad batch, and it only
+// ever replaces the steps of the entries actually selected.
+const REDO_STEPS = has('redo-steps');
 const PROVIDER = arg('provider', 'gemini');
 // Fallback chain: a busy or retired model is not the end of the run. The first one that answers
 // is remembered for the rest of the batches.
@@ -149,7 +152,7 @@ const todo = [];
 for (const [id, e] of exercises) {
   if (ONLY.length && !ONLY.includes(id)) continue;
   const entry = hu[id] || {};
-  const need = { id, ex: e, name: !hasText(entry.name), steps: ONLY_DESC ? false : !hasSteps(entry) };
+  const need = { id, ex: e, name: !hasText(entry.name), steps: ONLY_DESC ? false : (REDO_STEPS ? hasSteps(entry) : !hasSteps(entry)) };
   need.desc = (WITH_DESC || ONLY_DESC) && !hasText(entry.description);
   if (!need.steps && !need.desc && !need.name) continue;
   todo.push(need);
@@ -305,7 +308,7 @@ function apply(id, got) {
   // anything the model sent back under that key is not a translation of them.
   if (!ONLY_DESC) {
     const steps = Array.isArray(got.instructions) ? got.instructions.filter(hasText) : [];
-    if (!hasSteps(entry) && steps.length) entry.instructions = steps.map(s => cleanHu(s));
+    if (steps.length && (REDO_STEPS || !hasSteps(entry))) entry.instructions = steps.map(s => cleanHu(s));
   }
   if ((WITH_DESC || ONLY_DESC) && !hasText(entry.description) && hasText(got.description)) {
     entry.description = cleanHu(got.description);
