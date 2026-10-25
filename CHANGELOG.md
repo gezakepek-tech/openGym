@@ -4,6 +4,14 @@ Newest first. Each release is a `## vX.Y.Z (YYYY-MM-DD)` section, and the releas
 GitHub and GitLab are that section, word for word. New work goes under `## Unreleased` until the
 tag. Write it for the people using the app: what changed for them, short, no em dashes.
 
+## Unreleased
+
+**AI Coach works with picky OpenAI-compatible gateways** (#804). Some endpoints answer the Coach
+with a plain 400 "please check the request parameters" and no hint why. The Coach now tries a
+simpler request on its own (a looser JSON mode, the other token-limit field, no temperature, and
+as a last resort JSON asked for in the prompt only), remembers what that endpoint and model
+accepted so the next run asks right away, and if nothing works shows you the endpoint's own words.
+
 ## v1.4.3 (DATE)
 
 The community release. Most of what's below was asked for on GitHub and Discord or sent in as a
