@@ -62,19 +62,22 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
+const probeErrors = {};
+
 function reachable(host, port) {
   return new Promise((resolve) => {
     // An outgoing connect, never listen(): a wrapper such as Passenger allows only one listen()
     // per process, and that one belongs to the public server.
     const sock = net.connect({ host, port });
-    const settle = (ok) => {
+    const settle = (ok, code) => {
       sock.removeAllListeners();
       sock.destroy();
+      if (ok) delete probeErrors[host]; else probeErrors[host] = code;
       resolve(ok);
     };
-    sock.setTimeout(400, () => settle(false));
+    sock.setTimeout(400, () => settle(false, 'timeout'));
     sock.once('connect', () => settle(true));
-    sock.once('error', () => settle(false));
+    sock.once('error', (e) => settle(false, e.code || e.message));
   });
 }
 
@@ -117,7 +120,7 @@ async function startApi() {
     if (stripped) env.NODE_OPTIONS = stripped; else delete env.NODE_OPTIONS;
   }
 
-  child = spawn(process.execPath, [path.join(root, 'api', 'server.js')], {
+  child = spawn(process.execPath, [path.join(root, 'deploy', 'api-entry.mjs')], {
     env,
     cwd: path.join(root, 'api'),
     stdio: 'inherit',
@@ -242,6 +245,7 @@ server.listen(PORT, () => console.log(`[deploy] web on :${PORT}, serving ${DIST}
 for (let i = 0; i < 20; i += 1) {
   const host = await detectApiHost();
   if (host) { console.log(`[deploy] api reachable on ${host}:${childPort}`); break; }
+  if (i === 19) console.error(`[deploy] api NOT reachable on :${childPort} — ${JSON.stringify(probeErrors)}`);
   await new Promise(r => setTimeout(r, 500));
 }
 
